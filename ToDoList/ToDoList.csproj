@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="controller\ItemController.cs" />
     <Compile Include="entity\Item.cs" />
     <Compile Include="repository\ItemRepository.cs" />
     <Page Include="MainWindow.xaml">

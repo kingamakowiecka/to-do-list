@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Grid >
+        <DataGrid Name="dataGrid1" HorizontalAlignment="Left" Height="318" VerticalAlignment="Top" Width="515" Margin="-8,-8,0,0" CanUserAddRows="False"/>
     </Grid>
 </Window>
