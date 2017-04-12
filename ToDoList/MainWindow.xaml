@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
-    <Grid >
-        <DataGrid Name="dataGrid1" HorizontalAlignment="Left" Height="318" VerticalAlignment="Top" Width="515" Margin="-8,-8,0,0" CanUserAddRows="False"/>
+        Title="MainWindow" 
+        x:Name="TestWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Grid DataContext="{Binding ElementName=TestWindow, Path=.}">
+        <DataGrid Name="dataGrid1" Background ="Black" ItemsSource="{Binding itemList}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Width="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Decription" Binding="{Binding Decription}" Width="*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Finished}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button>Save</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button>Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
-using ToDoList.entity;
-using ToDoList.repository;
+using ToDoList.Entity;
+using ToDoList.Repository;
 
-namespace ToDoList.controller
+namespace ToDoList.Controller
 {
-    class ItemController
+    public class ItemController
     {
         private ItemRepository itemRepository;
 
         public ItemController (ItemRepository itemRepository)
         {
-            this.itemRepository = itemRepository;
+           this.itemRepository = itemRepository;
         }
 
         public List<Item> getItems()
         {
-            return itemRepository.Items;
+            return itemRepository.FindAll();
         }
     }
 }

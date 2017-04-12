@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using ToDoList.controller;
-using ToDoList.entity;
-using ToDoList.repository;
+using ToDoList.Controller;
+using ToDoList.Entity;
+using ToDoList.Repository;
 
 namespace ToDoList
 {
@@ -12,24 +13,22 @@ namespace ToDoList
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static ItemRepository itemRepository = new ItemRepository();
-        ItemController itemController = new ItemController(itemRepository);
+        private static ItemRepositoryImpl itemRepository = new ItemRepositoryImpl();
+        private ItemController itemController = new ItemController(itemRepository);
+        public ObservableCollection<Item> itemList { get; set; }
 
         public MainWindow()
         {
+            itemList = new ObservableCollection<Item>();
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Item> items = itemController.getItems();
-
-            dataGrid1.ItemsSource = items;
-            if (dataGrid1.Columns.Count > 0)
+            foreach (Item item in itemController.getItems())
             {
-                dataGrid1.Columns[dataGrid1.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                itemList.Add(item);
             }
         }
-
     }
 }

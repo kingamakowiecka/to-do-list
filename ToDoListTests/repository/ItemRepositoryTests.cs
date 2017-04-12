@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using ToDoList.entity;
+using ToDoList.Entity;
 
-namespace ToDoList.repository.Tests
+namespace ToDoList.Repository.Tests
 {
     [TestClass()]
     public class ItemRepositoryTests
@@ -11,10 +11,10 @@ namespace ToDoList.repository.Tests
         public void shouldReturnFakeItemsList()
         {
             // arange
-            ItemRepository itemRepository = new ItemRepository();
+            ItemRepositoryImpl itemRepository = new ItemRepositoryImpl();
 
             // act
-            List<Item> items = itemRepository.Items;
+            List<Item> items = itemRepository.FindAll();
 
             // assert
             Assert.AreEqual(items.Count, 10);

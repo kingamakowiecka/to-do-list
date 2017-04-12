@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToDoList.entity
+namespace ToDoList.Entity
 {
     public class Item
     {
