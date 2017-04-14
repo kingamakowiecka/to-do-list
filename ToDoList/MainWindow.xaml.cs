@@ -1,34 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using ToDoList.Controller;
-using ToDoList.Entity;
-using ToDoList.Repository;
 
 namespace ToDoList
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private static ItemRepositoryImpl itemRepository = new ItemRepositoryImpl();
-        private ItemController itemController = new ItemController(itemRepository);
-        public ObservableCollection<Item> itemList { get; set; }
+        private ItemController itemController;
 
-        public MainWindow()
+        public MainWindow(ItemController itemController)
         {
-            itemList = new ObservableCollection<Item>();
+            this.itemController = itemController;
             InitializeComponent();
+            DataContext = itemController.GetItems();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnClosed(EventArgs e)
         {
-            foreach (Item item in itemController.getItems())
-            {
-                itemList.Add(item);
-            }
+            base.OnClosed(e);
+            Application.Current.Shutdown();
         }
     }
 }

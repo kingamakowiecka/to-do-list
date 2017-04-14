@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoList"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        x:Name="TestWindow" Height="350" Width="525" Loaded="Window_Loaded">
-    <Grid DataContext="{Binding ElementName=TestWindow, Path=.}">
-        <DataGrid Name="dataGrid1" Background ="Black" ItemsSource="{Binding itemList}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Width="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False">
+        Title="To Do List"  Height="350" Width="525">
+    <Grid>
+        <DataGrid Name="dataGrid1" Background ="Black" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Width="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>

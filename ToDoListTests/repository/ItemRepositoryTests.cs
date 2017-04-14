@@ -11,7 +11,7 @@ namespace ToDoList.Repository.Tests
         public void shouldReturnFakeItemsList()
         {
             // arange
-            ItemRepositoryImpl itemRepository = new ItemRepositoryImpl();
+            ItemRepository itemRepository = new ItemRepository();
 
             // act
             List<Item> items = itemRepository.FindAll();

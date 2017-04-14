@@ -9,14 +9,13 @@ namespace ToDoList.Controller.Tests
     [TestClass()]
     public class ItemControllerTests
     {
-        private Mock<ItemRepository> mockItemRepository;
+        private Mock<IItemRepository> mockItemRepository;
         private ItemController itemControllerUnderTest;
-
 
         [TestInitialize]
         public void SetUp()
         {
-            mockItemRepository = new Mock<ItemRepository>();
+            mockItemRepository = new Mock<IItemRepository>();
             itemControllerUnderTest = new ItemController(mockItemRepository.Object);
         }
 
@@ -29,7 +28,7 @@ namespace ToDoList.Controller.Tests
             mockItemRepository.Setup(m => m.FindAll()).Returns(() => expectedItems);
 
             //Act
-            List<Item> returnedItems = itemControllerUnderTest.getItems();
+            List<Item> returnedItems = itemControllerUnderTest.GetItems();
 
             //Assert
             Assert.AreEqual(expectedItems, returnedItems);

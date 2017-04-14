@@ -6,14 +6,14 @@ namespace ToDoList.Controller
 {
     public class ItemController
     {
-        private ItemRepository itemRepository;
+        private IItemRepository itemRepository;
 
-        public ItemController (ItemRepository itemRepository)
+        public ItemController(IItemRepository itemRepository)
         {
-           this.itemRepository = itemRepository;
+            this.itemRepository = itemRepository;
         }
 
-        public List<Item> getItems()
+        public List<Item> GetItems()
         {
             return itemRepository.FindAll();
         }
