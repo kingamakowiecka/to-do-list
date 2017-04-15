@@ -67,7 +67,7 @@
     <Compile Include="Entity\Item.cs" />
     <Compile Include="Repository\IItemRepository.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
-    <Compile Include="Setup\Installers.cs" />
+    <Compile Include="Config\Installers.cs" />
     <Compile Include="View\IShell.cs" />
     <Compile Include="View\Shell.cs" />
     <Page Include="MainWindow.xaml">

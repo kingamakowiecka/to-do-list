@@ -6,5 +6,7 @@ namespace ToDoList.Repository
     public interface IItemRepository
     {
         List<Item> FindAll();
+
+        void Save(Item item);
     }
 }

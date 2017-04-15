@@ -21,6 +21,11 @@ namespace ToDoList.Repository
             return items;
         }
 
+        public void Save(Item item)
+        {
+            items.Add(item);
+        }
+
         private Item PrepareFakeItem(int itemNumber)
         {
             Item item = new Item()

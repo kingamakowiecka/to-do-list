@@ -17,5 +17,10 @@ namespace ToDoList.Controller
         {
             return itemRepository.FindAll();
         }
+
+        public void AddItem(Item item)
+        {
+            itemRepository.Save(item);
+        }
     }
 }

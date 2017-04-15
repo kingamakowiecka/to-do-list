@@ -10,28 +10,41 @@ namespace ToDoList.Controller.Tests
     public class ItemControllerTests
     {
         private Mock<IItemRepository> mockItemRepository;
-        private ItemController itemControllerUnderTest;
+        private ItemController itemController;
 
         [TestInitialize]
         public void SetUp()
         {
             mockItemRepository = new Mock<IItemRepository>();
-            itemControllerUnderTest = new ItemController(mockItemRepository.Object);
+            itemController = new ItemController(mockItemRepository.Object);
         }
 
         [TestMethod()]
         public void ShouldReturnItemsList()
         {
-            //Arrange
+            // arrange
             List<Item> expectedItems = new List<Item>();
 
             mockItemRepository.Setup(m => m.FindAll()).Returns(() => expectedItems);
 
-            //Act
-            List<Item> returnedItems = itemControllerUnderTest.GetItems();
+            // act
+            List<Item> returnedItems = itemController.GetItems();
 
-            //Assert
+            // assert
             Assert.AreEqual(expectedItems, returnedItems);
+        }
+
+        [TestMethod()]
+        public void ShouldSaveNewItemInRepository()
+        {
+            // arrange
+            Item item = new Item();
+
+            // act
+            itemController.AddItem(item);
+
+            // assert
+            mockItemRepository.Verify(mock => mock.Save(item), Times.Once());
         }
     }
 }
