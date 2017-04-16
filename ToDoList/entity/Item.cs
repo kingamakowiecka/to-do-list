@@ -1,19 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ToDoList.Entity
 {
     public class Item
     {
-        private long id;
-        private String name;
-        private String decription;
-        private DateTime date;
-        private Boolean finished;
-
-        public long Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public string Decription { get => decription; set => decription = value; }
-        public DateTime Date { get => date; set => date = value; }
-        public bool Finished { get => finished; set => finished = value; }
+        [Key]
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
+        public bool Finished { get; set; }
     }
 }

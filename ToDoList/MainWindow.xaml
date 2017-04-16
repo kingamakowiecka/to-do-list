@@ -8,10 +8,22 @@
         Title="To Do List"  Height="350" Width="525" Loaded="Window_Loaded">
     <Grid>
         <DataGrid Name="DataGrid1" Background ="Black" ItemsSource="{Binding ItemList}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Width="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="true">
+            <DataGrid.Resources>
+                <Style x:Key="errorStyle" TargetType="{x:Type TextBox}">
+                    <Setter Property="Padding" Value="-2"/>
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Decription" Binding="{Binding Decription}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
                 <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Finished}"/>
                 <DataGridTemplateColumn>

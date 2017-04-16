@@ -9,6 +9,10 @@ Simple C# WPF desktop applcation for To Do List.
 
 [Castle Windsor](https://github.com/castleproject/Windsor/)
 
+[Entity Framework](https://www.nuget.org/packages/EntityFramework)
+
+[SQL Server Compact](https://technet.microsoft.com/pl-pl/library/cc835494(v=sql.110).aspx)
+
 ## Prerequisites
 
 .Net Framework 4.5.2
