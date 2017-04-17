@@ -78,9 +78,9 @@
     </ApplicationDefinition>
     <Compile Include="Controller\ItemController.cs" />
     <Compile Include="Entity\Item.cs" />
+    <Compile Include="View\ExceptionHandler.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
     <Compile Include="Config\Installers.cs" />
-    <Compile Include="View\IShell.cs" />
     <Compile Include="View\Shell.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

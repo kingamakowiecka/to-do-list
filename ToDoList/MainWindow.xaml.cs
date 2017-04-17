@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using ToDoList.Controller;
 using ToDoList.Entity;
+using ToDoList.View;
 
 namespace ToDoList
 {
@@ -12,12 +13,15 @@ namespace ToDoList
     {
         public ObservableCollection<Item> ItemList { get; set; }
         private ItemController itemController;
+        private ExceptionHandler excpetionHandler;
         private static object syncLock = new object();
 
-        public MainWindow(ItemController itemController)
+        public MainWindow(ItemController itemController, ExceptionHandler excpetionHandler)
         {
-            InitializeComponent();
             this.itemController = itemController;
+            this.excpetionHandler = excpetionHandler;
+
+            InitializeComponent();
             ItemList = new ObservableCollection<Item>();
             BindingOperations.EnableCollectionSynchronization(ItemList, syncLock);
             DataContext = this;
@@ -30,6 +34,7 @@ namespace ToDoList
                 ItemList.Add(item);
             }
         }
+
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
@@ -40,7 +45,15 @@ namespace ToDoList
         {
             DataGrid1.CommitEdit();
             Item newItem = ((Button)sender).DataContext as Item;
-            itemController.AddItem(newItem);
+            try
+            {
+                itemController.AddItem(newItem);
+            }
+            catch (Exception ex)
+            {
+                String errorMessage = excpetionHandler.HandleException(ex);
+                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

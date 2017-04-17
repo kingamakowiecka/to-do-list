@@ -15,7 +15,7 @@ namespace ToDoList
             container = new WindsorContainer();
             container.Install(FromAssembly.This());
 
-            var start = container.Resolve<IShell>();
+            var start = container.Resolve<Shell>();
             start.Run();
 
             container.Release(start);

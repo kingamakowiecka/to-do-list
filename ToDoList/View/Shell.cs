@@ -1,6 +1,6 @@
 ﻿namespace ToDoList.View
 {
-    public class Shell : IShell
+    public class Shell
     {
         private MainWindow window;
 
