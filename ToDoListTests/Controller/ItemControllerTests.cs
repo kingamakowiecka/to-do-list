@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace ToDoList.Controller.Tests
     [TestClass()]
     public class ItemControllerTests
     {
+        private static DateTime TODAY = DateTime.Now;
+        private static DateTime TOMMOROW = TODAY.AddDays(1);
+        private static Item FIRST_DB_ITEM = new Item { Id = 1, Description = "Descritpion1", Name = "Name1", Date = TODAY };
+        private static Item SECOND_DB_ITEM = new Item { Id = 2, Description = "Descritpion2", Name = "Name2", Date = TOMMOROW };
+        private static Item THIRD_DB_ITEM = new Item { Id = 3, Description = "Descritpion3", Name = "Name3", Date = TOMMOROW };
+
         private Mock<ItemRepository> mockItemRepository;
         private Mock<DbSet<Item>> mockDbSet;
         private ItemController itemController;
@@ -24,18 +31,20 @@ namespace ToDoList.Controller.Tests
             mockDbSet = CreateDbSetMock(expectedItems.AsQueryable());
             itemController = new ItemController(mockItemRepository.Object);
         }
-
+        
         [TestMethod()]
-        public void ShouldReturnItemsList()
+        public void ShouldReturnItemsListByDate()
         {
             // arrange
             mockItemRepository.Setup(c => c.Items).Returns(mockDbSet.Object);
 
             // act
-            List<Item> returnedItems = itemController.GetItems();
+            List<Item> returnedItems = itemController.GetItemsByDate(TOMMOROW);
 
             // assert
-            CollectionAssert.AreEqual(expectedItems, returnedItems);
+            Assert.AreEqual(2, returnedItems.Count);
+            CollectionAssert.Contains(returnedItems, SECOND_DB_ITEM);
+            CollectionAssert.Contains(returnedItems, THIRD_DB_ITEM);
         }
 
         [TestMethod()]
@@ -70,9 +79,9 @@ namespace ToDoList.Controller.Tests
         {
             return new List<Item>
             {
-                new Item {Id = 1, Description = "Descritpion1", Name = "Name1" },
-                new Item {Id = 2, Description = "Descritpion2", Name = "Name2" },
-                new Item {Id = 3, Description = "Descritpion3", Name = "Name3" },
+                FIRST_DB_ITEM,
+                SECOND_DB_ITEM,
+                THIRD_DB_ITEM
             };
         }
     }

@@ -3,15 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:ToDoList"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="To Do List"  Height="350" Width="525" Loaded="Window_Loaded">
+        Title="To Do List" Height="550" Width="575" Loaded="Window_Loaded">
+
     <Grid>
-        <DataGrid Name="DataGrid1" Background ="Black" ItemsSource="{Binding ItemList}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Width="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="true">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="667*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Name="DataGrid1" Background ="Black" ItemsSource="{Binding ItemList}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Width="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="true" Grid.ColumnSpan="2" Margin="0,46,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                <DataGridTemplateColumn Header="Date">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Date, StringFormat={}{0:yyyy-MM-dd HH:mm tt}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <xctk:DateTimePicker Value="{Binding Date}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
                 <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Finished}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -29,5 +47,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <DatePicker Name="SearchDate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="233" Height="29" Margin="36,10,0,0" SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Short"/>
+        <Button Content="Select Items" HorizontalAlignment="Left" VerticalAlignment="Top" Width="205" Margin="286,10,0,0" Height="28" Grid.ColumnSpan="2" x:Name="SelectBtn" Click="ClickSelectBtn"/>
     </Grid>
 </Window>

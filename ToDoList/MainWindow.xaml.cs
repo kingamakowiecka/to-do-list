@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,10 +30,8 @@ namespace ToDoList
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (Item item in itemController.GetItems())
-            {
-                ItemList.Add(item);
-            }
+            DateTime date = (DateTime)SearchDate.SelectedDate;
+            GetItemsList(itemController.GetItemsByDate(date));
         }
 
         protected override void OnClosed(EventArgs e)
@@ -53,6 +52,21 @@ namespace ToDoList
             {
                 String errorMessage = excpetionHandler.HandleException(ex);
                 MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ClickSelectBtn(object sender, RoutedEventArgs e)
+        {
+            DateTime date = (DateTime)SearchDate.SelectedDate;
+            ItemList.Clear();
+            GetItemsList(itemController.GetItemsByDate(date));
+        }
+
+        private void GetItemsList(List<Item> items)
+        {
+            foreach (Item item in items)
+            {
+                ItemList.Add(item);
             }
         }
     }
