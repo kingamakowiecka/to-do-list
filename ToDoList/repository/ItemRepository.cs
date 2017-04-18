@@ -15,6 +15,12 @@ namespace ToDoList.Repository
             this.ItemDbContext = itemDbContext;
         }
 
+        public void Delete(Item item)
+        {
+            ItemDbContext.Entry(item).State = EntityState.Deleted;
+            ItemDbContext.SaveChanges();
+        }
+
         public List<Item> FindByDate(DateTime date)
         {
             return ItemDbContext.Items.Where(i => i.Date >= date).OrderBy(i => i.Date).ToList();

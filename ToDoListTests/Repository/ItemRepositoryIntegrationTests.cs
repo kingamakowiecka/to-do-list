@@ -75,5 +75,23 @@ namespace ToDoList.Repository.Tests
             Assert.AreEqual(returnedItems[0].Name, item.Name);
             Assert.AreEqual(returnedItems[0].Id, item.Id);
         }
+
+        [TestMethod()]
+        public void ShouldDeleteItemFromDb()
+        {
+            // arrange
+            itemDbContext.Items.Add(ItemRepositoryTestsConstants.SECOND_DB_ITEM);
+            itemDbContext.Items.Add(ItemRepositoryTestsConstants.THIRD_DB_ITEM);
+            itemDbContext.SaveChanges();
+
+            // act
+            itemRepository.Delete(ItemRepositoryTestsConstants.SECOND_DB_ITEM);
+
+            // assert
+            List<Item> returnedItems = itemRepository.FindByDate(ItemRepositoryTestsConstants.TOMMOROW);
+            Assert.AreEqual(1, returnedItems.Count);
+            CollectionAssert.DoesNotContain(returnedItems, ItemRepositoryTestsConstants.SECOND_DB_ITEM);
+            CollectionAssert.Contains(returnedItems, ItemRepositoryTestsConstants.THIRD_DB_ITEM);
+        }
     }
 }

@@ -63,6 +63,20 @@ namespace ToDoList.Controller.Tests
             mockItemRepository.Verify(x => x.Update(newItem), Times.Once);
         }
 
+        [TestMethod()]
+        public void ShouldCallDeleteOnItemRepositoryForNewItem()
+        {
+            // arrange
+            Item itemToDelete = new Item ();
+
+            // act
+            itemController.DeleteItem(itemToDelete);
+
+            // assert
+            mockItemRepository.Verify(x => x.Delete(itemToDelete), Times.Once);
+        }
+
+
         private List<Item> PrepareItems()
         {
             return new List<Item>

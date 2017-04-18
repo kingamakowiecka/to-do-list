@@ -55,6 +55,20 @@ namespace ToDoList.Repository.Tests
         }
 
         [TestMethod()]
+        public void ShouldDeleteItemInRepository()
+        {
+            // arrange
+            mockItemDbContext.Setup(x => x.Items).Returns(mockDbSet.Object);
+            Item item = new Item();
+
+            // act
+            itemRepository.Delete(item);
+
+            // assert
+            mockItemDbContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
         public void ShouldReturnItemsListByDate()
         {
             // arrange

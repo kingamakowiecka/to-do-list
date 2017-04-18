@@ -14,6 +14,11 @@ namespace ToDoList.Controller
             this.itemRepository = itemRepository;
         }
 
+        public void DeleteItem(Item item)
+        {
+            itemRepository.Delete(item);
+        }
+
         public void SaveItem(Item item)
         {
             if (item.Id == 0)

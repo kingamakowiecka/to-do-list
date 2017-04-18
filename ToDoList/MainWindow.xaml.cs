@@ -56,6 +56,13 @@ namespace ToDoList
             }
         }
 
+        private void ClickDeleteBtn(object sender, RoutedEventArgs e)
+        {
+            Item item = ((Button)sender).DataContext as Item;
+            itemController.DeleteItem(item);
+            GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
+        }
+
         private void ClickSelectBtn(object sender, RoutedEventArgs e)
         {
             GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
