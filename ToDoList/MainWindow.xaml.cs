@@ -46,7 +46,8 @@ namespace ToDoList
             Item newItem = ((Button)sender).DataContext as Item;
             try
             {
-                itemController.AddItem(newItem);
+                itemController.SaveItem(newItem);
+                GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
             }
             catch (Exception ex)
             {
@@ -57,13 +58,12 @@ namespace ToDoList
 
         private void ClickSelectBtn(object sender, RoutedEventArgs e)
         {
-            DateTime date = (DateTime)SearchDate.SelectedDate;
-            ItemList.Clear();
-            GetItemsList(itemController.GetItemsByDate(date));
+            GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
         }
 
         private void GetItemsList(List<Item> items)
         {
+            ItemList.Clear();
             foreach (Item item in items)
             {
                 ItemList.Add(item);

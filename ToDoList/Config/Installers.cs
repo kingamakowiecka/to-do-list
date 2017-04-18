@@ -12,7 +12,8 @@ namespace ToDoList.Setup
         {
             container.Register(Component.For<ItemController>());
             container.Register(Component.For<ExceptionHandler>());
-            container.Register(Component.For<ItemRepository>());
+            container.Register(Component.For<IItemRepository>().ImplementedBy<ItemRepository>());
+            container.Register(Component.For<ItemDbContext>());
             container.Register(Component.For<Shell>());
             container.Register(Component.For<MainWindow>().LifestyleTransient());
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ToDoList.Entity;
 using ToDoList.Repository;
 
@@ -8,22 +7,28 @@ namespace ToDoList.Controller
 {
     public class ItemController
     {
-        private ItemRepository itemRepository;
+        private IItemRepository itemRepository;
 
-        public ItemController(ItemRepository itemRepository)
+        public ItemController(IItemRepository itemRepository)
         {
             this.itemRepository = itemRepository;
         }
 
-        public void AddItem(Item item)
+        public void SaveItem(Item item)
         {
-            itemRepository.Items.Add(item);
-            itemRepository.SaveChanges();
+            if (item.Id == 0)
+            {
+                itemRepository.Save(item);
+            }
+            else
+            {
+                itemRepository.Update(item);
+            }
         }
 
         public List<Item> GetItemsByDate(DateTime date)
         {
-            return itemRepository.Items.Where(i => i.Date >= date).OrderBy(i => i.Date).ToList();
+            return itemRepository.FindByDate(date);
         }
     }
 }

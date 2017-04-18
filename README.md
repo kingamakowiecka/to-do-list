@@ -13,6 +13,10 @@ Simple C# WPF desktop applcation for To Do List.
 
 [SQL Server Compact](https://technet.microsoft.com/pl-pl/library/cc835494(v=sql.110).aspx)
 
+[DateTimePicker](https://msdn.microsoft.com/pl-pl/library/system.windows.forms.datetimepicker(v=vs.110).aspx)
+
+[Effort.EF6](https://www.nuget.org/packages/Effort.EF6/)
+
 ## Prerequisites
 
 .Net Framework 4.5.2

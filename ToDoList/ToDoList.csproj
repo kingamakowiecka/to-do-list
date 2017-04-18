@@ -52,12 +52,16 @@
     <Reference Include="Moq, Version=4.7.8.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>packages\Moq.4.7.8\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="NMemory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
+      <HintPath>packages\NMemory.1.1.0\lib\net45\NMemory.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -96,6 +100,8 @@
     </ApplicationDefinition>
     <Compile Include="Controller\ItemController.cs" />
     <Compile Include="Entity\Item.cs" />
+    <Compile Include="Repository\IItemRepository.cs" />
+    <Compile Include="Repository\ItemDbContext.cs" />
     <Compile Include="View\ExceptionHandler.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
     <Compile Include="Config\Installers.cs" />
