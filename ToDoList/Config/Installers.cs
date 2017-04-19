@@ -16,6 +16,7 @@ namespace ToDoList.Setup
             container.Register(Component.For<ItemDbContext>());
             container.Register(Component.For<Shell>());
             container.Register(Component.For<MainWindow>().LifestyleTransient());
+            container.Register(Component.For<NotificationWindow>().LifestyleTransient());
         }
     }
 }

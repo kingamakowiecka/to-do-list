@@ -15,12 +15,14 @@ namespace ToDoList
         public ObservableCollection<Item> ItemList { get; set; }
         private ItemController itemController;
         private ExceptionHandler excpetionHandler;
+        private NotificationWindow notificationWindow;
         private static object syncLock = new object();
 
-        public MainWindow(ItemController itemController, ExceptionHandler excpetionHandler)
+        public MainWindow(ItemController itemController, ExceptionHandler excpetionHandler, NotificationWindow notificationWindow)
         {
             this.itemController = itemController;
             this.excpetionHandler = excpetionHandler;
+            this.notificationWindow = notificationWindow;
 
             InitializeComponent();
             ItemList = new ObservableCollection<Item>();
@@ -66,6 +68,12 @@ namespace ToDoList
         private void ClickSelectBtn(object sender, RoutedEventArgs e)
         {
             GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
+        }
+
+        private void ClickNotificationBtn(object sender, RoutedEventArgs e)
+        {
+            notificationWindow.SelectedItem = (Item)DataGrid1.SelectedItem;
+            notificationWindow.Show();
         }
 
         private void GetItemsList(List<Item> items)

@@ -7,7 +7,9 @@
         xmlns:local="clr-namespace:ToDoList"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="To Do List" Height="550" Width="575" Loaded="Window_Loaded">
+        Title="To Do List" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Loaded="Window_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -42,6 +44,26 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="DeleteBtn" Click="ClickDeleteBtn" Content="Delete">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Id}" Value="{x:Null}">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Id}" Value="0">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="NotificationBtn" Click="ClickNotificationBtn" Content="Set notification">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Style.Triggers>

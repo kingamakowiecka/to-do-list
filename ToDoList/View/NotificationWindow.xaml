@@ -1,0 +1,30 @@
+﻿<Window x:Class="ToDoList.View.NotificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoList.View"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="NotificationWindow" Height="437" Width="466"
+        Loaded="Window_Loaded">
+    <Grid>
+        <GroupBox Header="Item Details" HorizontalAlignment="Center" Height="231" Margin="20,10,20,0" VerticalAlignment="Top" Width="398">
+            <Grid Margin="-12,0">
+                <Label Content="Name:" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Width="73"/>
+                <TextBox Name="ItemName" HorizontalAlignment="Left" Height="23" Margin="107,25,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>
+                <Label Content="Description:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="73" RenderTransformOrigin="0.493,0.077"/>
+                <Label Content="Date:" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top" Width="73"/>
+                <TextBox Name="ItemDate" HorizontalAlignment="Left" Height="23" Margin="107,176,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>
+                <TextBox x:Name="ItemDescription" HorizontalAlignment="Left" Height="100" Margin="107,62,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Notification settings" HorizontalAlignment="Center" Height="112" Margin="20,256,20,0" VerticalAlignment="Top" Width="398">
+            <Grid HorizontalAlignment="Left" Height="79" Margin="6,7,0,0" VerticalAlignment="Top" Width="376">
+                <xctk:DateTimePicker Name="NotificationDate" Margin="46,10,52,38"/>
+                <Button Content="Save notification" HorizontalAlignment="Left" Margin="46,47,0,0" VerticalAlignment="Top" Width="131" Background="LimeGreen"/>
+                <Button Content="Delete notification" HorizontalAlignment="Left" Margin="193,47,0,0" VerticalAlignment="Top" Width="131" Background="WhiteSmoke"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
