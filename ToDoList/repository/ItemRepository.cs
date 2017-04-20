@@ -8,34 +8,34 @@ namespace ToDoList.Repository
 {
     public class ItemRepository : IItemRepository
     {
-        private ItemDbContext ItemDbContext;
+        private ItemsDbContext dbContext;
 
-        public ItemRepository(ItemDbContext itemDbContext)
+        public ItemRepository(ItemsDbContext dbContext)
         {
-            this.ItemDbContext = itemDbContext;
+            this.dbContext = dbContext;
         }
 
         public void Delete(Item item)
         {
-            ItemDbContext.Entry(item).State = EntityState.Deleted;
-            ItemDbContext.SaveChanges();
+            dbContext.Entry(item).State = EntityState.Deleted;
+            dbContext.SaveChanges();
         }
 
         public List<Item> FindByDate(DateTime date)
         {
-            return ItemDbContext.Items.Where(i => i.Date >= date).OrderBy(i => i.Date).ToList();
+            return dbContext.Items.Where(i => i.Date >= date).OrderBy(i => i.Date).ToList();
         }
 
         public void Save(Item item)
         {
-            ItemDbContext.Entry(item).State = EntityState.Added;
-            ItemDbContext.SaveChanges();
+            dbContext.Entry(item).State = EntityState.Added;
+            dbContext.SaveChanges();
         }
 
         public void Update(Item item)
         {
-            ItemDbContext.Entry(item).State = EntityState.Modified;
-            ItemDbContext.SaveChanges();
+            dbContext.Entry(item).State = EntityState.Modified;
+            dbContext.SaveChanges();
         }
     }
 }

@@ -100,8 +100,11 @@
     </ApplicationDefinition>
     <Compile Include="Controller\ItemController.cs" />
     <Compile Include="Entity\Item.cs" />
+    <Compile Include="Entity\ItemNotification.cs" />
+    <Compile Include="Repository\IItemNotificationRepository.cs" />
     <Compile Include="Repository\IItemRepository.cs" />
-    <Compile Include="Repository\ItemDbContext.cs" />
+    <Compile Include="Repository\ItemNotificationRepository.cs" />
+    <Compile Include="Repository\ItemsDbContext.cs" />
     <Compile Include="View\ExceptionHandler.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
     <Compile Include="Config\Installers.cs" />

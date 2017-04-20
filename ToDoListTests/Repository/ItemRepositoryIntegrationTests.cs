@@ -9,33 +9,33 @@ namespace ToDoList.Repository.Tests
     [TestClass()]
     public class ItemRepositoryIntegrtionTests
     {
-        private ItemDbContext itemDbContext;
+        private ItemsDbContext dbContext;
         private IItemRepository itemRepository;
 
         [TestInitialize]
         public void SetUp()
         {
             var connection = DbConnectionFactory.CreateTransient();
-            itemDbContext = new ItemDbContext(connection);
-            itemRepository = new ItemRepository(itemDbContext);
+            dbContext = new ItemsDbContext(connection);
+            itemRepository = new ItemRepository(dbContext);
         }
 
         [TestMethod()]
         public void ShouldReturnItemsListByDate()
         {
             // arrange
-            itemDbContext.Items.Add(ItemRepositoryTestsConstants.FIRST_DB_ITEM);
-            itemDbContext.Items.Add(ItemRepositoryTestsConstants.SECOND_DB_ITEM);
-            itemDbContext.Items.Add(ItemRepositoryTestsConstants.THIRD_DB_ITEM);
-            itemDbContext.SaveChanges();
+            dbContext.Items.Add(RepositoryTestsConstants.FIRST_DB_ITEM);
+            dbContext.Items.Add(RepositoryTestsConstants.SECOND_DB_ITEM);
+            dbContext.Items.Add(RepositoryTestsConstants.THIRD_DB_ITEM);
+            dbContext.SaveChanges();
 
             // act
-            List<Item> returnedItems = itemRepository.FindByDate(ItemRepositoryTestsConstants.TOMMOROW);
+            List<Item> returnedItems = itemRepository.FindByDate(RepositoryTestsConstants.TOMMOROW);
 
             // assert
             Assert.AreEqual(2, returnedItems.Count);
-            CollectionAssert.Contains(returnedItems, ItemRepositoryTestsConstants.SECOND_DB_ITEM);
-            CollectionAssert.Contains(returnedItems, ItemRepositoryTestsConstants.THIRD_DB_ITEM);
+            CollectionAssert.Contains(returnedItems, RepositoryTestsConstants.SECOND_DB_ITEM);
+            CollectionAssert.Contains(returnedItems, RepositoryTestsConstants.THIRD_DB_ITEM);
         }
 
         [TestMethod()]
@@ -44,33 +44,33 @@ namespace ToDoList.Repository.Tests
             // arrange
 
             // act
-            itemRepository.Save(ItemRepositoryTestsConstants.FIRST_DB_ITEM);
+            itemRepository.Save(RepositoryTestsConstants.FIRST_DB_ITEM);
 
             // assert
-            List<Item> returnedItems = itemRepository.FindByDate(ItemRepositoryTestsConstants.TODAY);
+            List<Item> returnedItems = itemRepository.FindByDate(RepositoryTestsConstants.TODAY);
             Assert.AreEqual(1, returnedItems.Count);
-            Assert.AreEqual(returnedItems[0].Date, ItemRepositoryTestsConstants.FIRST_DB_ITEM.Date);
-            Assert.AreEqual(returnedItems[0].Description, ItemRepositoryTestsConstants.FIRST_DB_ITEM.Description);
-            Assert.AreEqual(returnedItems[0].Name, ItemRepositoryTestsConstants.FIRST_DB_ITEM.Name);
-            Assert.AreEqual(returnedItems[0].Id, ItemRepositoryTestsConstants.FIRST_DB_ITEM.Id);
+            Assert.AreEqual(returnedItems[0].Date, RepositoryTestsConstants.FIRST_DB_ITEM.Date);
+            Assert.AreEqual(returnedItems[0].Description, RepositoryTestsConstants.FIRST_DB_ITEM.Description);
+            Assert.AreEqual(returnedItems[0].Name, RepositoryTestsConstants.FIRST_DB_ITEM.Name);
+            Assert.AreEqual(returnedItems[0].Id, RepositoryTestsConstants.FIRST_DB_ITEM.Id);
         }
 
         [TestMethod()]
         public void ShouldUpdateItem()
         {
             // arrange
-            Item item = new Item { Id = 4, Description = "Item for update", Name = "Update test", Date = ItemRepositoryTestsConstants.TODAY };
-            itemDbContext.Items.Add(item);
-            itemDbContext.SaveChanges();
+            Item item = new Item { Id = 4, Description = "Item for update", Name = "Update test", Date = RepositoryTestsConstants.TODAY };
+            dbContext.Items.Add(item);
+            dbContext.SaveChanges();
 
             // act
-            item.Date = ItemRepositoryTestsConstants.YESTERDAY;
+            item.Date = RepositoryTestsConstants.YESTERDAY;
             itemRepository.Update(item);
 
             // assert
-            List<Item> returnedItems = itemRepository.FindByDate(ItemRepositoryTestsConstants.YESTERDAY);
+            List<Item> returnedItems = itemRepository.FindByDate(RepositoryTestsConstants.YESTERDAY);
             Assert.AreEqual(1, returnedItems.Count);
-            Assert.AreEqual(returnedItems[0].Date, ItemRepositoryTestsConstants.YESTERDAY);
+            Assert.AreEqual(returnedItems[0].Date, RepositoryTestsConstants.YESTERDAY);
             Assert.AreEqual(returnedItems[0].Description, item.Description);
             Assert.AreEqual(returnedItems[0].Name, item.Name);
             Assert.AreEqual(returnedItems[0].Id, item.Id);
@@ -80,18 +80,18 @@ namespace ToDoList.Repository.Tests
         public void ShouldDeleteItemFromDb()
         {
             // arrange
-            itemDbContext.Items.Add(ItemRepositoryTestsConstants.SECOND_DB_ITEM);
-            itemDbContext.Items.Add(ItemRepositoryTestsConstants.THIRD_DB_ITEM);
-            itemDbContext.SaveChanges();
+            dbContext.Items.Add(RepositoryTestsConstants.SECOND_DB_ITEM);
+            dbContext.Items.Add(RepositoryTestsConstants.THIRD_DB_ITEM);
+            dbContext.SaveChanges();
 
             // act
-            itemRepository.Delete(ItemRepositoryTestsConstants.SECOND_DB_ITEM);
+            itemRepository.Delete(RepositoryTestsConstants.SECOND_DB_ITEM);
 
             // assert
-            List<Item> returnedItems = itemRepository.FindByDate(ItemRepositoryTestsConstants.TOMMOROW);
+            List<Item> returnedItems = itemRepository.FindByDate(RepositoryTestsConstants.TOMMOROW);
             Assert.AreEqual(1, returnedItems.Count);
-            CollectionAssert.DoesNotContain(returnedItems, ItemRepositoryTestsConstants.SECOND_DB_ITEM);
-            CollectionAssert.Contains(returnedItems, ItemRepositoryTestsConstants.THIRD_DB_ITEM);
+            CollectionAssert.DoesNotContain(returnedItems, RepositoryTestsConstants.SECOND_DB_ITEM);
+            CollectionAssert.Contains(returnedItems, RepositoryTestsConstants.THIRD_DB_ITEM);
         }
     }
 }
