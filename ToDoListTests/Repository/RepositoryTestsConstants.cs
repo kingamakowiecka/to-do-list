@@ -13,14 +13,12 @@ namespace ToDoListTests.Repository
         public static Item THIRD_DB_ITEM = new Item { Id = 3, Description = "Descritpion3", Name = "Name3", Date = TOMMOROW };
         public static ItemNotification FITST_ITEM_NOTIFICATION = new ItemNotification()
         {
-            Id = 1,
             Item = FIRST_DB_ITEM,
             ItemId = FIRST_DB_ITEM.Id,
             NotifiactionDate = FIRST_DB_ITEM.Date
         };
         public static ItemNotification SECOND_ITEM_NOTIFICATION = new ItemNotification()
         {
-            Id = 1,
             Item = SECOND_DB_ITEM,
             ItemId = SECOND_DB_ITEM.Id,
             NotifiactionDate = SECOND_DB_ITEM.Date

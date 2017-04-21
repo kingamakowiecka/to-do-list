@@ -12,5 +12,13 @@ namespace ToDoList.Repository
 
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<ItemNotification> ItemNotifications { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Item>()
+                        .HasOptional(i => i.ItemNotification)
+                        .WithRequired(n => n.Item)
+                        .WillCascadeOnDelete(true);
+        }
     }
 }

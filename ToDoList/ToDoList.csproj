@@ -98,6 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\ItemNotificationController.cs" />
     <Compile Include="Controller\ItemController.cs" />
     <Compile Include="Entity\Item.cs" />
     <Compile Include="Entity\ItemNotification.cs" />

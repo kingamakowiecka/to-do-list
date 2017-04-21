@@ -1,15 +1,17 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ToDoList.Entity;
+using System.Collections.Generic;
 using Effort;
 using ToDoListTests.Repository;
+using ToDoList.Entity;
 
 namespace ToDoList.Repository.Tests
 {
     [TestClass()]
-    public class ItemNotificationRepositoryIntegrationTests
+    public class RepositoryIntegrationTests
     {
         private ItemsDbContext dbContext;
         private IItemNotificationRepository itemNotificationRepository;
+        private IItemRepository itemRepository;
 
         [TestInitialize]
         public void SetUp()
@@ -17,10 +19,11 @@ namespace ToDoList.Repository.Tests
             var connection = DbConnectionFactory.CreateTransient();
             dbContext = new ItemsDbContext(connection);
             itemNotificationRepository = new ItemNotificationRepository(dbContext);
+            itemRepository = new ItemRepository(dbContext);
         }
 
         [TestMethod()]
-        public void ShouldReturnItemNotificationByItemId()
+        public void ShouldDeleteItemAndItsNotification()
         {
             // arrange
             dbContext.Items.Add(RepositoryTestsConstants.FIRST_DB_ITEM);
@@ -28,23 +31,14 @@ namespace ToDoList.Repository.Tests
             dbContext.SaveChanges();
 
             // act
-            ItemNotification returnedItemNotification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.FIRST_DB_ITEM.Id);
+            itemRepository.Delete(RepositoryTestsConstants.FIRST_DB_ITEM);
 
             // assert
-            Assert.AreEqual(RepositoryTestsConstants.FITST_ITEM_NOTIFICATION, returnedItemNotification);
-        }
+            List<Item> items = itemRepository.FindByDate(RepositoryTestsConstants.YESTERDAY);
+            ItemNotification notification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.FIRST_DB_ITEM.Id);
 
-        [TestMethod()]
-        public void ShouldSaveNewItemNotification()
-        {
-            // arrange
-
-            // act
-            itemNotificationRepository.Save(RepositoryTestsConstants.SECOND_ITEM_NOTIFICATION);
-
-            // assert
-            ItemNotification returnedItemNotification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.SECOND_DB_ITEM.Id);
-            Assert.AreEqual(RepositoryTestsConstants.SECOND_ITEM_NOTIFICATION, returnedItemNotification);
+            Assert.AreEqual(0, items.Count);
+            Assert.IsNull(notification);
         }
     }
 }

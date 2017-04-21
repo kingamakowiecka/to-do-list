@@ -17,7 +17,7 @@ namespace ToDoList.Repository
 
         public void Delete(Item item)
         {
-            dbContext.Entry(item).State = EntityState.Deleted;
+            dbContext.Items.Remove(item);
             dbContext.SaveChanges();
         }
 

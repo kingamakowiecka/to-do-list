@@ -1,16 +1,19 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToDoList.Entity
 {
     public class ItemNotification
     {
-        [Key]
-        public long Id { get; set; }
+        [Key, ForeignKey("Item")]
+        public long ItemId { get; set; }
+        [Required]
+        public virtual Item Item { get; set; }
+
+        [Required]
+        [Range(typeof(DateTime), "1/1/1970", "1/1/2100", ErrorMessage = "Invalid time format.")]
         public DateTime? NotifiactionDate { get; set; }
         public Boolean Notified { get; set; }
-
-        public long ItemId { get; set; }
-        public virtual Item Item { get; set; }
     }
 }

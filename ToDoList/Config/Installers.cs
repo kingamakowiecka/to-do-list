@@ -11,6 +11,7 @@ namespace ToDoList.Setup
         public void Install(Castle.Windsor.IWindsorContainer container, Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
         {
             container.Register(Component.For<ItemController>());
+            container.Register(Component.For<ItemNotificationController>());
             container.Register(Component.For<ExceptionHandler>());
             container.Register(Component.For<IItemRepository>().ImplementedBy<ItemRepository>());
             container.Register(Component.For<IItemNotificationRepository>().ImplementedBy<ItemNotificationRepository>());

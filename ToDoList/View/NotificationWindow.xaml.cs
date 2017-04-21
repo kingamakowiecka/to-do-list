@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Reflection;
 using System.Windows;
+using ToDoList.Controller;
 using ToDoList.Entity;
 
 namespace ToDoList.View
@@ -8,27 +10,67 @@ namespace ToDoList.View
     public partial class NotificationWindow : Window
     {
         public Item SelectedItem;
-        public ObservableCollection<Item> ItemList { get; set; }
+        private ItemNotificationController itemNotificationController;
+        private ExceptionHandler excpetionHandler;
 
-        public NotificationWindow()
+        public NotificationWindow(ItemNotificationController itemNotificationController, ExceptionHandler excpetionHandler)
         {
+            this.itemNotificationController = itemNotificationController;
+            this.excpetionHandler = excpetionHandler;
             InitializeComponent();
-            ItemList = new ObservableCollection<Item>();
             DataContext = this;
         }
 
-        protected override void OnClosed(EventArgs e)
+        public void NotificationWindowClosing(object sender, CancelEventArgs e)
         {
-            base.OnClosed(e);
+            typeof(Window).GetField("_isClosing", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(this, false);
+            e.Cancel = true;
+            this.Hide();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        void NotificationWindowActivated(object sender, EventArgs e)
         {
-            ItemName.Text = SelectedItem.Name;
-            ItemDescription.Text = SelectedItem.Description;
-            ItemDate.Text = SelectedItem.Date.ToString();
-            NotificationDate.Value = SelectedItem.Date;
-            ItemList.Add(SelectedItem);
+            try
+            {
+                ItemNotification itemNotification = itemNotificationController.GetItemNotificationByItemId(SelectedItem.Id);
+                ItemName.Text = SelectedItem.Name;
+                ItemDescription.Text = SelectedItem.Description;
+                ItemDate.Text = SelectedItem.Date.ToString();
+
+                if (itemNotification == null)
+                {
+                    NotificationDate.Value = SelectedItem.Date;
+                }
+                else
+                {
+                    NotificationDate.Value = itemNotification.NotifiactionDate;
+                }
+            }
+            catch (Exception ex)
+            {
+                String errorMessage = excpetionHandler.HandleException(ex);
+                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ClickSaveNotificationBtn(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ItemNotification newItem = new ItemNotification()
+                {
+                    Item = SelectedItem,
+                    ItemId = SelectedItem.Id,
+                    NotifiactionDate = NotificationDate.Value
+                };
+                itemNotificationController.SaveItemNotification(newItem);
+                MessageBoxResult result = MessageBox.Show("Notification saved successfully", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                String errorMessage = excpetionHandler.HandleException(ex);
+                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

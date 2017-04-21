@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToDoList.Entity
 {
@@ -14,5 +15,7 @@ namespace ToDoList.Entity
         [Range(typeof(DateTime), "1/1/1970", "1/1/2100", ErrorMessage = "Invalid time format.")]
         public DateTime? Date { get; set; }
         public bool Finished { get; set; }
+
+        public virtual ItemNotification ItemNotification { get; set; }
     }
 }

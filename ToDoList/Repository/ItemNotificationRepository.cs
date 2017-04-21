@@ -21,7 +21,7 @@ namespace ToDoList.Repository
 
         ItemNotification IItemNotificationRepository.FindByItemId(long itemId)
         {
-            return dbContext.ItemNotifications.Where(i => i.ItemId >= itemId).Single();
+            return dbContext.ItemNotifications.Where(i => i.ItemId == itemId).SingleOrDefault();
         }
     }
 }
