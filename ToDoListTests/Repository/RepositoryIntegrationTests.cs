@@ -27,6 +27,7 @@ namespace ToDoList.Repository.Tests
         {
             // arrange
             dbContext.Items.Add(RepositoryTestsConstants.FIRST_DB_ITEM);
+            dbContext.SaveChanges();
             dbContext.ItemNotifications.Add(RepositoryTestsConstants.FITST_ITEM_NOTIFICATION);
             dbContext.SaveChanges();
 

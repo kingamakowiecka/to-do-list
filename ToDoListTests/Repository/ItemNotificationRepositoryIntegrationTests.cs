@@ -46,5 +46,21 @@ namespace ToDoList.Repository.Tests
             ItemNotification returnedItemNotification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.SECOND_DB_ITEM.Id);
             Assert.AreEqual(RepositoryTestsConstants.SECOND_ITEM_NOTIFICATION, returnedItemNotification);
         }
+
+        [TestMethod()]
+        public void ShoulDeleteItemNotification()
+        {
+            // arrange
+            dbContext.Items.Add(RepositoryTestsConstants.FIRST_DB_ITEM);
+            dbContext.ItemNotifications.Add(RepositoryTestsConstants.FITST_ITEM_NOTIFICATION);
+            dbContext.SaveChanges();
+
+            // act
+            itemNotificationRepository.Delete(RepositoryTestsConstants.FITST_ITEM_NOTIFICATION);
+
+            // assert
+            ItemNotification returnedItemNotification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.SECOND_DB_ITEM.Id);
+            Assert.IsNull(returnedItemNotification);
+        }
     }
 }

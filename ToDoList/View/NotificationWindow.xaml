@@ -23,8 +23,8 @@
         <GroupBox Header="Notification settings" HorizontalAlignment="Center" Height="112" Margin="20,256,20,0" VerticalAlignment="Top" Width="398">
             <Grid HorizontalAlignment="Left" Height="79" Margin="6,7,0,0" VerticalAlignment="Top" Width="376">
                 <xctk:DateTimePicker Name="NotificationDate" Margin="46,10,52,38"/>
-                <Button Content="Save notification" HorizontalAlignment="Left" Margin="46,47,0,0" VerticalAlignment="Top" Width="131" Click="ClickSaveNotificationBtn"/>
-                <Button Content="Delete notification" HorizontalAlignment="Left" Margin="193,47,0,0" VerticalAlignment="Top" Width="131" />
+                <Button Content="Save notification" HorizontalAlignment="Left" Margin="46,47,0,0" VerticalAlignment="Top" Width="131" Click="ClickSaveNotificationBtn"  x:Name="SaveNotificationBtn"/>
+                <Button Content="Delete notification" HorizontalAlignment="Left" Margin="193,47,0,0" VerticalAlignment="Top" Width="131" IsEnabled="False" Click="ClickDeleteNotificationBtn" x:Name="DeleteNotificationBtn"/>
             </Grid>
         </GroupBox>
     </Grid>

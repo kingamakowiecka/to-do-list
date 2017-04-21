@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
 using ToDoList.Entity;
 using ToDoList.Repository;
 
@@ -38,7 +37,7 @@ namespace ToDoList.Controller.Tests
         }
 
         [TestMethod()]
-        public void ShouldCallSaveOnItemRepositoryForNewItem()
+        public void ShouldCallSaveOnItemNotificationRepositoryForNewItemNotification()
         {
             // arrange
             ItemNotification itemNotification = new ItemNotification();
@@ -48,6 +47,19 @@ namespace ToDoList.Controller.Tests
 
             // assert
             mockItemNotificationRepository.Verify(x => x.Save(itemNotification), Times.Once);
+        }
+
+        [TestMethod()]
+        public void ShouldCallDeleteOnItemNotificationRepository()
+        {
+            // arrange
+            ItemNotification itemNotification = new ItemNotification();
+
+            // act
+            itemNotificationController.DeleteItemNotification(itemNotification);
+
+            // assert
+            mockItemNotificationRepository.Verify(x => x.Delete(itemNotification), Times.Once);
         }
     }
 }

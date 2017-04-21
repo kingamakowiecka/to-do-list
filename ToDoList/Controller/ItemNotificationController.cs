@@ -21,5 +21,10 @@ namespace ToDoList.Controller
         {
             return itemNotificationRepository.FindByItemId(itemId);
         }
+
+        public void DeleteItemNotification(ItemNotification itemNotification)
+        {
+            itemNotificationRepository.Delete(itemNotification);
+        }
     }
 }

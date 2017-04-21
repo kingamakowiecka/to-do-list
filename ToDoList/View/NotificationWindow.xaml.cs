@@ -10,6 +10,7 @@ namespace ToDoList.View
     public partial class NotificationWindow : Window
     {
         public Item SelectedItem;
+        public ItemNotification SelectedItemNotification;
         private ItemNotificationController itemNotificationController;
         private ExceptionHandler excpetionHandler;
 
@@ -25,25 +26,26 @@ namespace ToDoList.View
         {
             typeof(Window).GetField("_isClosing", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(this, false);
             e.Cancel = true;
-            this.Hide();
+            Hide();
         }
 
         void NotificationWindowActivated(object sender, EventArgs e)
         {
+            SelectedItemNotification = null;
             try
             {
-                ItemNotification itemNotification = itemNotificationController.GetItemNotificationByItemId(SelectedItem.Id);
+                SelectedItemNotification = itemNotificationController.GetItemNotificationByItemId(SelectedItem.Id);
                 ItemName.Text = SelectedItem.Name;
                 ItemDescription.Text = SelectedItem.Description;
                 ItemDate.Text = SelectedItem.Date.ToString();
 
-                if (itemNotification == null)
+                if (SelectedItemNotification != null)
                 {
-                    NotificationDate.Value = SelectedItem.Date;
+                    SetUpNotificationControls(SelectedItemNotification.NotifiactionDate, true);
                 }
                 else
                 {
-                    NotificationDate.Value = itemNotification.NotifiactionDate;
+                    SetUpNotificationControls(null, false);
                 }
             }
             catch (Exception ex)
@@ -71,6 +73,27 @@ namespace ToDoList.View
                 String errorMessage = excpetionHandler.HandleException(ex);
                 MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void ClickDeleteNotificationBtn(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                itemNotificationController.DeleteItemNotification(SelectedItemNotification);
+                SetUpNotificationControls(null, false);
+                MessageBoxResult result = MessageBox.Show("Notification deleted successfully", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                String errorMessage = excpetionHandler.HandleException(ex);
+                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SetUpNotificationControls(DateTime? date, Boolean buttonEnabled)
+        {
+            NotificationDate.Value = date;
+            DeleteNotificationBtn.IsEnabled = buttonEnabled;
         }
     }
 }

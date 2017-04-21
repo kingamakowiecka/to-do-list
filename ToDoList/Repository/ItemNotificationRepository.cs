@@ -13,13 +13,19 @@ namespace ToDoList.Repository
             this.dbContext = dbContext;
         }
 
+        public void Delete(ItemNotification notification)
+        {
+            dbContext.ItemNotifications.Remove(notification);
+            dbContext.SaveChanges();
+        }
+
         public void Save(ItemNotification notification)
         {
             dbContext.Entry(notification).State = EntityState.Added;
             dbContext.SaveChanges();
         }
 
-        ItemNotification IItemNotificationRepository.FindByItemId(long itemId)
+        public ItemNotification FindByItemId(long itemId)
         {
             return dbContext.ItemNotifications.Where(i => i.ItemId == itemId).SingleOrDefault();
         }
