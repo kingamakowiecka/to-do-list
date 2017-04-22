@@ -45,16 +45,14 @@ namespace ToDoList
         private void ClickSaveBtn(object sender, RoutedEventArgs e)
         {
             DataGrid1.CommitEdit();
-            Item newItem = ((Button)sender).DataContext as Item;
             try
             {
-                itemController.SaveItem(newItem);
+                itemController.SaveItem(((Button)sender).DataContext as Item);
                 GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
             }
             catch (Exception ex)
             {
-                String errorMessage = excpetionHandler.HandleException(ex);
-                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+                excpetionHandler.HandleException(ex);
             }
         }
 
@@ -62,20 +60,25 @@ namespace ToDoList
         {
             try
             {
-                Item item = ((Button)sender).DataContext as Item;
-                itemController.DeleteItem(item);
+                itemController.DeleteItem(((Button)sender).DataContext as Item);
                 GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
             }
             catch (Exception ex)
             {
-                String errorMessage = excpetionHandler.HandleException(ex);
-                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+                excpetionHandler.HandleException(ex);
             }
         }
 
         private void ClickSelectBtn(object sender, RoutedEventArgs e)
         {
-            GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
+            try
+            {
+                GetItemsList(itemController.GetItemsByDate((DateTime)SearchDate.SelectedDate));
+            }
+            catch (Exception ex)
+            {
+                excpetionHandler.HandleException(ex);
+            }
         }
 
         private void ClickNotificationBtn(object sender, RoutedEventArgs e)

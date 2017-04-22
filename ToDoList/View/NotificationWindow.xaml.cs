@@ -34,11 +34,7 @@ namespace ToDoList.View
             SelectedItemNotification = null;
             try
             {
-                SelectedItemNotification = itemNotificationController.GetItemNotificationByItemId(SelectedItem.Id);
-                ItemName.Text = SelectedItem.Name;
-                ItemDescription.Text = SelectedItem.Description;
-                ItemDate.Text = SelectedItem.Date.ToString();
-
+                SetupWindowData();
                 if (SelectedItemNotification != null)
                 {
                     SetUpNotificationControls(SelectedItemNotification.NotifiactionDate, true);
@@ -50,28 +46,28 @@ namespace ToDoList.View
             }
             catch (Exception ex)
             {
-                String errorMessage = excpetionHandler.HandleException(ex);
-                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+                excpetionHandler.HandleException(ex);
             }
+        }
+
+        private void SetupWindowData()
+        {
+            SelectedItemNotification = itemNotificationController.GetItemNotificationByItemId(SelectedItem.Id);
+            ItemName.Text = SelectedItem.Name;
+            ItemDescription.Text = SelectedItem.Description;
+            ItemDate.Text = SelectedItem.Date.ToString();
         }
 
         private void ClickSaveNotificationBtn(object sender, RoutedEventArgs e)
         {
             try
             {
-                ItemNotification newItem = new ItemNotification()
-                {
-                    Item = SelectedItem,
-                    ItemId = SelectedItem.Id,
-                    NotifiactionDate = NotificationDate.Value
-                };
-                itemNotificationController.SaveItemNotification(newItem);
+                itemNotificationController.SaveItemNotification(CreateNewItemNotification());
                 MessageBoxResult result = MessageBox.Show("Notification saved successfully", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                String errorMessage = excpetionHandler.HandleException(ex);
-                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+                excpetionHandler.HandleException(ex);
             }
         }
 
@@ -85,8 +81,7 @@ namespace ToDoList.View
             }
             catch (Exception ex)
             {
-                String errorMessage = excpetionHandler.HandleException(ex);
-                MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+                excpetionHandler.HandleException(ex);
             }
         }
 
@@ -94,6 +89,16 @@ namespace ToDoList.View
         {
             NotificationDate.Value = date;
             DeleteNotificationBtn.IsEnabled = buttonEnabled;
+        }
+
+        private ItemNotification CreateNewItemNotification()
+        {
+            return new ItemNotification()
+            {
+                Item = SelectedItem,
+                ItemId = SelectedItem.Id,
+                NotifiactionDate = NotificationDate.Value
+            };
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Windows;
 
 namespace ToDoList.View
 {
     public class ExceptionHandler
     {
-        public String HandleException(Exception exception)
+        public void HandleException(Exception exception)
         {
             String errorMessage;
 
@@ -24,8 +25,7 @@ namespace ToDoList.View
             {
                 errorMessage = exception.GetBaseException().Message;
             }
-
-            return errorMessage;
+            MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
