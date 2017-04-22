@@ -17,6 +17,8 @@ Simple C# WPF desktop applcation for To Do List.
 
 [Effort.EF6](https://www.nuget.org/packages/Effort.EF6/)
 
+[Quartz.NET](https://www.quartz-scheduler.net/)
+
 ## Prerequisites
 
 .Net Framework 4.5.2
