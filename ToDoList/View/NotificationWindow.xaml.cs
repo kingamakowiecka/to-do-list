@@ -25,7 +25,7 @@ namespace ToDoList.View
         {
             ItemName.Text = SelectedItem.Name;
             ItemDescription.Text = SelectedItem.Description;
-            ItemDate.Text = SelectedItem.Date.ToString();
+            ItemDate.Text = String.Format("{0:yyyy-MM-dd HH:mm}", SelectedItem.Date);
         }
     }
 }

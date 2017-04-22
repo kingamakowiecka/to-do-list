@@ -7,9 +7,8 @@ using System.Windows.Data;
 using ToDoList.Controller;
 using ToDoList.Cron;
 using ToDoList.Entity;
-using ToDoList.View;
 
-namespace ToDoList
+namespace ToDoList.View
 {
     public partial class MainWindow : Window
     {

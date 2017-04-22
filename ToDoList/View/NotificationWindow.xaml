@@ -12,11 +12,11 @@
         <GroupBox Header="Item Details" HorizontalAlignment="Center" Height="231" Margin="20,10,20,0" VerticalAlignment="Top" Width="398">
             <Grid Margin="-12,0">
                 <Label Content="Name:" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Width="73"/>
-                <TextBox Name="ItemName" HorizontalAlignment="Left" Height="23" Margin="107,25,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>
+                <TextBox Name="ItemName" HorizontalAlignment="Left" Height="23" Margin="107,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269"/>
                 <Label Content="Description:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="73" RenderTransformOrigin="0.493,0.077"/>
                 <Label Content="Date:" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top" Width="73"/>
-                <TextBox Name="ItemDate" HorizontalAlignment="Left" Height="23" Margin="107,176,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>
-                <TextBox x:Name="ItemDescription" HorizontalAlignment="Left" Height="100" Margin="107,62,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>
+                <TextBox Name="ItemDate" HorizontalAlignment="Left" Height="23" Margin="107,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269"/>
+                <TextBox x:Name="ItemDescription" HorizontalAlignment="Left" Height="100" Margin="107,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269"/>
             </Grid>
         </GroupBox>
     </Grid>

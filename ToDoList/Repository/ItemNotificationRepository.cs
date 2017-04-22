@@ -28,11 +28,8 @@ namespace ToDoList.Repository
 
         public List<ItemNotification> FindNotNotifiedByNotificationDate(DateTime notifiactionDate)
         {
-            DateTime dateFrom = notifiactionDate.AddMinutes(-1);
-            DateTime dateTo = notifiactionDate.AddMinutes(1);
             return dbContext.ItemNotifications.Where(
-                i => i.NotifiactionDate > dateFrom &&
-                i.NotifiactionDate < dateTo &&
+                i => i.NotifiactionDate == notifiactionDate &&
                 i.Notified == false).ToList();
         }
 

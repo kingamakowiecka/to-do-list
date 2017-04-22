@@ -1,4 +1,4 @@
-﻿<Window x:Class="ToDoList.MainWindow"
+﻿<Window x:Class="ToDoList.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,36 +7,60 @@
         xmlns:local="clr-namespace:ToDoList"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="To Do List" Height="350" Width="525"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="To Do List" Height="600" Width="755"
+        WindowStartupLocation="CenterScreen"
         Loaded="WindowLoaded">
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="667*"/>
-            <ColumnDefinition Width="50*"/>
-        </Grid.ColumnDefinitions>
-        <DataGrid Name="DataGrid1" Background ="Black" ItemsSource="{Binding ItemList}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Width="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="true" Grid.ColumnSpan="2" Margin="0,46,0,0">
+        <GroupBox Header="Items List Selection" HorizontalAlignment="Center" Height="69" Margin="8,10,0,0" VerticalAlignment="Top" Width="467" Grid.ColumnSpan="2">
+            <Grid Height="33" Margin="10,10,-2,0" VerticalAlignment="Top" Width="447">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="134*"/>
+                    <ColumnDefinition Width="313*"/>
+                </Grid.ColumnDefinitions>
+                <DatePicker Name="SearchDate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="204" Height="29" Margin="10,0,0,0" SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Short" Grid.ColumnSpan="2"/>
+                <Button Content="Select Items" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Margin="113,1,0,0" Height="29" x:Name="SelectBtn" Click="ClickSelectBtn" Grid.Column="1"/>
+            </Grid>
+        </GroupBox>
+        <DataGrid ColumnWidth="*" Name="DataGrid1" HeadersVisibility="Column" ItemsSource="{Binding ItemList}" VerticalAlignment="Top" Height="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="true" Margin="10,113,10,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
-                <DataGridTemplateColumn Header="Date">
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100">                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>                </DataGridTextColumn>                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                                        <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Date"  Width="140">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Date, StringFormat={}{0:yyyy-MM-dd HH:mm}}" />
+                            <TextBlock Text="{Binding Date, StringFormat={}{0:yyyy-MM-dd HH:mm}}" VerticalAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <xctk:DateTimePicker Value="{Binding Date}"/>
+                            <xctk:DateTimePicker Value="{Binding Date}" VerticalAlignment="Center" Format="Custom" FormatString="yyyy-MM-dd HH:mm" AllowSpin="True" TimePickerAllowSpin="True"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Finished}"/>
-                <DataGridTemplateColumn>
+                <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Finished}" Width="55">
+                    <DataGridCheckBoxColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.ElementStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridTemplateColumn Width="73">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="SaveBtn" Click="ClickSaveBtn" Content="Save">
+                            <Button x:Name="SaveBtn" Click="ClickSaveBtn" Content="Save" VerticalAlignment="Center">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Style.Triggers>
@@ -50,10 +74,10 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="73">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="DeleteBtn" Click="ClickDeleteBtn" Content="Delete">
+                            <Button x:Name="DeleteBtn" Click="ClickDeleteBtn" Content="Delete" VerticalAlignment="Center">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Style.Triggers>
@@ -70,10 +94,10 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="73">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="NotificationBtn" Click="ClickNotificationBtn" Content="Set notification">
+                            <Button x:Name="NotificationBtn" Click="ClickNotificationBtn" Content="Notification" VerticalAlignment="Center">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Style.Triggers>
@@ -92,7 +116,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DatePicker Name="SearchDate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="233" Height="29" Margin="36,10,0,0" SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Short"/>
-        <Button Content="Select Items" HorizontalAlignment="Left" VerticalAlignment="Top" Width="205" Margin="286,10,0,0" Height="28" Grid.ColumnSpan="2" x:Name="SelectBtn" Click="ClickSelectBtn"/>
     </Grid>
 </Window>

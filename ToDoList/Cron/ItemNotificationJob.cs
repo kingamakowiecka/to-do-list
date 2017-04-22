@@ -21,6 +21,9 @@ namespace ToDoList.Cron
 
         public void Execute(IJobExecutionContext context)
         {
+            DateTime date = DateTime.Now;
+            date.AddTicks(-(date.Ticks % TimeSpan.TicksPerSecond));
+
             List<ItemNotification> notifications = itemNotificationRepository.FindNotNotifiedByNotificationDate(DateTime.Now);
 
             foreach (ItemNotification notification in notifications)
