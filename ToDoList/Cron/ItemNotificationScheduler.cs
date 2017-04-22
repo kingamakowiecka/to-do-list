@@ -29,7 +29,7 @@ namespace ToDoList.Cron
                 IJobDetail job = new JobDetailImpl("notificationJob", null, typeof(ItemNotificationJob));
                 ITrigger trigger = TriggerBuilder.Create()
                     .WithDailyTimeIntervalSchedule
-                    (s => s.WithIntervalInSeconds(10)
+                    (s => s.WithIntervalInSeconds(60)
                             .OnEveryDay())
                             .Build();
 

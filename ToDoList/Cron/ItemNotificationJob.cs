@@ -22,9 +22,9 @@ namespace ToDoList.Cron
         public void Execute(IJobExecutionContext context)
         {
             DateTime date = DateTime.Now;
-            date.AddTicks(-(date.Ticks % TimeSpan.TicksPerSecond));
+            date = date.AddTicks(-(date.Ticks % TimeSpan.TicksPerMinute));
 
-            List<ItemNotification> notifications = itemNotificationRepository.FindNotNotifiedByNotificationDate(DateTime.Now);
+            List<ItemNotification> notifications = itemNotificationRepository.FindNotNotifiedByNotificationDate(date);
 
             foreach (ItemNotification notification in notifications)
             {
