@@ -1,6 +1,4 @@
-﻿using Quartz;
-using Quartz.Impl;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -19,15 +17,15 @@ namespace ToDoList
         private ItemController itemController;
         private ExceptionHandler excpetionHandler;
         private ItemNotificationScheduler itemNotificationScheduler;
-        private NotificationWindow notificationWindow;
+        private NotificationSettingsWindow notificationSettingsWindow;
         private static object syncLock = new object();
 
         public MainWindow(ItemController itemController, ExceptionHandler excpetionHandler,
-            NotificationWindow notificationWindow, ItemNotificationScheduler itemNotificationScheduler)
+            NotificationSettingsWindow notificationWindow, ItemNotificationScheduler itemNotificationScheduler)
         {
             this.itemController = itemController;
             this.excpetionHandler = excpetionHandler;
-            this.notificationWindow = notificationWindow;
+            this.notificationSettingsWindow = notificationWindow;
             this.itemNotificationScheduler = itemNotificationScheduler;
 
             InitializeComponent();
@@ -91,8 +89,8 @@ namespace ToDoList
 
         private void ClickNotificationBtn(object sender, RoutedEventArgs e)
         {
-            notificationWindow.SelectedItem = (Item)DataGrid1.SelectedItem;
-            notificationWindow.Show();
+            notificationSettingsWindow.SelectedItem = (Item)DataGrid1.SelectedItem;
+            notificationSettingsWindow.Show();
         }
 
         private void GetItemsList(List<Item> items)

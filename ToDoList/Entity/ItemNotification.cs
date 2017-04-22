@@ -12,8 +12,8 @@ namespace ToDoList.Entity
         public virtual Item Item { get; set; }
 
         [Required]
-        [Range(typeof(DateTime), "1/1/1970", "1/1/2100", ErrorMessage = "Invalid time format.")]
-        public DateTime? NotifiactionDate { get; set; }
+        [Range(typeof(DateTime), "1/1/1970", "1/1/2100", ErrorMessage = "Invalid time range.")]
+        public DateTime NotifiactionDate { get; set; }
         public Boolean Notified { get; set; }
     }
 }

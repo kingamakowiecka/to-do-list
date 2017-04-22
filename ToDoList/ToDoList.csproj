@@ -121,6 +121,9 @@
     <Compile Include="View\ExceptionHandler.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
     <Compile Include="Config\Installers.cs" />
+    <Compile Include="View\NotificationSettingsWindow.xaml.cs">
+      <DependentUpon>NotificationSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NotificationWindow.xaml.cs">
       <DependentUpon>NotificationWindow.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\NotificationSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\NotificationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

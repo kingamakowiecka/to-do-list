@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using ToDoList.Entity;
 
@@ -19,15 +21,31 @@ namespace ToDoList.Repository
             dbContext.SaveChanges();
         }
 
+        public ItemNotification FindByItemId(long itemId)
+        {
+            return dbContext.ItemNotifications.Where(i => i.ItemId == itemId).SingleOrDefault();
+        }
+
+        public List<ItemNotification> FindNotNotifiedByNotificationDate(DateTime notifiactionDate)
+        {
+            DateTime dateFrom = notifiactionDate.AddMinutes(-1);
+            DateTime dateTo = notifiactionDate.AddMinutes(1);
+            return dbContext.ItemNotifications.Where(
+                i => i.NotifiactionDate > dateFrom &&
+                i.NotifiactionDate < dateTo &&
+                i.Notified == false).ToList();
+        }
+
         public void Save(ItemNotification notification)
         {
             dbContext.Entry(notification).State = EntityState.Added;
             dbContext.SaveChanges();
         }
 
-        public ItemNotification FindByItemId(long itemId)
+        public void Update(ItemNotification notification)
         {
-            return dbContext.ItemNotifications.Where(i => i.ItemId == itemId).SingleOrDefault();
+            dbContext.Entry(notification).State = EntityState.Modified;
+            dbContext.SaveChanges();
         }
     }
 }

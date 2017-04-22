@@ -2,6 +2,7 @@
 using ToDoList.Entity;
 using Effort;
 using ToDoListTests.Repository;
+using System.Collections.Generic;
 
 namespace ToDoList.Repository.Tests
 {
@@ -61,6 +62,41 @@ namespace ToDoList.Repository.Tests
             // assert
             ItemNotification returnedItemNotification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.SECOND_DB_ITEM.Id);
             Assert.IsNull(returnedItemNotification);
+        }
+
+        [TestMethod()]
+        public void ShoulReturnNotNotifiedItemsNotificaitonsByDateTime()
+        {
+            // arrange
+            dbContext.Items.Add(RepositoryTestsConstants.SECOND_DB_ITEM);
+            dbContext.ItemNotifications.Add(RepositoryTestsConstants.SECOND_ITEM_NOTIFICATION);
+            dbContext.Items.Add(RepositoryTestsConstants.FOURTH_DB_ITEM);
+            dbContext.ItemNotifications.Add(RepositoryTestsConstants.FOURTH_ITEM_NOTIFICATION);
+            dbContext.SaveChanges();
+
+            // act
+            List<ItemNotification> returnedNotifications = itemNotificationRepository.FindNotNotifiedByNotificationDate(RepositoryTestsConstants.TOMMOROW);
+
+            // assert
+            Assert.AreEqual(1, returnedNotifications.Count);
+            CollectionAssert.Contains(returnedNotifications, RepositoryTestsConstants.SECOND_ITEM_NOTIFICATION);
+        }
+
+        [TestMethod()]
+        public void ShoulUpdateItemNotification()
+        {
+            // arrange
+            dbContext.Items.Add(RepositoryTestsConstants.FOURTH_DB_ITEM);
+            dbContext.ItemNotifications.Add(RepositoryTestsConstants.FOURTH_ITEM_NOTIFICATION);
+            dbContext.SaveChanges();
+
+            // act
+            RepositoryTestsConstants.FOURTH_ITEM_NOTIFICATION.Notified = true;
+            itemNotificationRepository.Update(RepositoryTestsConstants.FOURTH_ITEM_NOTIFICATION);
+
+            // assert
+            ItemNotification returnedItemNotification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.FOURTH_DB_ITEM.Id);
+            Assert.AreEqual(true, returnedItemNotification.Notified);
         }
     }
 }

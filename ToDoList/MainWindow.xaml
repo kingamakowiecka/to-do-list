@@ -23,7 +23,7 @@
                 <DataGridTemplateColumn Header="Date">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Date, StringFormat={}{0:yyyy-MM-dd HH:mm tt}}" />
+                            <TextBlock Text="{Binding Date, StringFormat={}{0:yyyy-MM-dd HH:mm}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>

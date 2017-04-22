@@ -26,17 +26,16 @@ namespace ToDoList.Repository.Tests
         public void ShouldDeleteItemAndItsNotification()
         {
             // arrange
-            dbContext.Items.Add(RepositoryTestsConstants.FIRST_DB_ITEM);
-            dbContext.SaveChanges();
-            dbContext.ItemNotifications.Add(RepositoryTestsConstants.FITST_ITEM_NOTIFICATION);
+            dbContext.Items.Add(RepositoryTestsConstants.THIRD_DB_ITEM);
+            dbContext.ItemNotifications.Add(RepositoryTestsConstants.THIRD_ITEM_NOTIFICATION);
             dbContext.SaveChanges();
 
             // act
-            itemRepository.Delete(RepositoryTestsConstants.FIRST_DB_ITEM);
+            itemRepository.Delete(RepositoryTestsConstants.THIRD_DB_ITEM);
 
             // assert
             List<Item> items = itemRepository.FindByDate(RepositoryTestsConstants.YESTERDAY);
-            ItemNotification notification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.FIRST_DB_ITEM.Id);
+            ItemNotification notification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.THIRD_DB_ITEM.Id);
 
             Assert.AreEqual(0, items.Count);
             Assert.IsNull(notification);
