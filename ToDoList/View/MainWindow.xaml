@@ -51,15 +51,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Finished}" Width="55">
-                    <DataGridCheckBoxColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                            <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridCheckBoxColumn.ElementStyle>
-                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Finished}" Width="55"/>
                 <DataGridTemplateColumn Width="73">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
