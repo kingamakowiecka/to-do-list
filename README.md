@@ -1,6 +1,16 @@
 # To Do List
 ## About
-Simple C# WPF desktop applcation for To Do List.
+Simple C# WPF desktop application for To Do List.
+
+## Features
+
+Every item on To Do List contains Name, Description, Finished flag and Date of item.
+
+User can add/remove/update items on list.
+
+Name and date are required fields. User also can select items by date - list shows items from db, which date is equal or higher than currently selected date.
+
+For each item, there is a possibility to set up notification. For each notification, for given date and time will show new window with item details. 
 
 ## Technology stack
 [NuGet](https://docs.microsoft.com/pl-pl/nuget/)
