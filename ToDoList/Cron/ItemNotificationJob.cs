@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using ToDoList.Entity;
 using ToDoList.Repository;
+using ToDoList.Util;
 using ToDoList.View;
 
 namespace ToDoList.Cron
@@ -21,9 +22,7 @@ namespace ToDoList.Cron
 
         public void Execute(IJobExecutionContext context)
         {
-            DateTime date = DateTime.Now;
-            date = date.AddTicks(-(date.Ticks % TimeSpan.TicksPerMinute));
-
+            DateTime date = DateTimeHelper.RemoveSecondsFromDateTime(DateTime.Now);
             List<ItemNotification> notifications = itemNotificationRepository.FindNotNotifiedByNotificationDate(date);
             ShowNotificationWindow(notifications);
         }

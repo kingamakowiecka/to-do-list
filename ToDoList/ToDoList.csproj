@@ -118,6 +118,7 @@
     <Compile Include="Repository\IItemRepository.cs" />
     <Compile Include="Repository\ItemNotificationRepository.cs" />
     <Compile Include="Repository\ItemsDbContext.cs" />
+    <Compile Include="Util\DateTimeHelper.cs" />
     <Compile Include="View\ExceptionHandler.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
     <Compile Include="Config\Installers.cs" />

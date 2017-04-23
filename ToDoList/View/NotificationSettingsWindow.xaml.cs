@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows;
 using ToDoList.Controller;
 using ToDoList.Entity;
+using ToDoList.Util;
 
 namespace ToDoList.View
 {
@@ -84,13 +85,11 @@ namespace ToDoList.View
 
         private ItemNotification CreateNewItemNotification()
         {
-            DateTime notificationDate = (DateTime)NotificationDate.Value;
-            notificationDate = notificationDate.AddTicks(-(notificationDate.Ticks % TimeSpan.TicksPerMinute));
             return new ItemNotification()
             {
                 Item = SelectedItem,
                 ItemId = SelectedItem.Id,
-                NotifiactionDate = notificationDate,
+                NotifiactionDate = DateTimeHelper.RemoveSecondsFromDateTime((DateTime)NotificationDate.Value),
                 Notified = false
             };
         }
