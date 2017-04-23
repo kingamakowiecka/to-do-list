@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
@@ -21,6 +22,10 @@ namespace ToDoList.View
             else if (exception is ArgumentNullException)
             {
                 errorMessage = "Item can't be empty";
+            }
+            else if (exception is DbUpdateException)
+            {
+                errorMessage = "Cannot save the same record two times";
             }
             else
             {

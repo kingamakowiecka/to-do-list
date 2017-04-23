@@ -3,6 +3,9 @@ using ToDoList.Entity;
 using Effort;
 using ToDoListTests.Repository;
 using System.Collections.Generic;
+using System;
+using System.Data.Entity.Validation;
+using System.Data.Entity.Infrastructure;
 
 namespace ToDoList.Repository.Tests
 {
@@ -46,6 +49,90 @@ namespace ToDoList.Repository.Tests
             // assert
             ItemNotification returnedItemNotification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.SECOND_DB_ITEM.Id);
             Assert.AreEqual(RepositoryTestsConstants.SECOND_ITEM_NOTIFICATION, returnedItemNotification);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(DbEntityValidationException))]
+        public void ShouldThrowEntityValidationExceptionWhenItemNotificationDateIsNull()
+        {
+            // arrange
+            Item item = new Item();
+            dbContext.Items.Add(item);
+
+            ItemNotification invalidNotification = new ItemNotification
+            {
+                Item = item,
+                ItemId = item.Id,
+                Notified = false
+            };
+
+            // act
+            itemNotificationRepository.Save(invalidNotification);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(DbEntityValidationException))]
+        public void ShouldThrowEntityValidationExceptionWhenItemIsNull()
+        {
+            // arrange
+            Item item = new Item();
+            dbContext.Items.Add(item);
+
+            ItemNotification invalidNotification = new ItemNotification
+            {
+                ItemId = item.Id,
+                Notified = false,
+                NotifiactionDate = DateTime.Now
+            };
+
+            // act
+            itemNotificationRepository.Save(invalidNotification);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(DbEntityValidationException))]
+        public void ShouldThrowEntityValidationExceptionWhenItemIdIsNull()
+        {
+            // arrange
+            Item item = new Item();
+            dbContext.Items.Add(item);
+
+            ItemNotification invalidNotification = new ItemNotification
+            {
+                Item = item,
+                Notified = false,
+                NotifiactionDate = DateTime.Now
+            };
+
+            // act
+            itemNotificationRepository.Save(invalidNotification);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(DbUpdateException))]
+        public void ShouldThrowDbUpdateExceptionWhenSameNotificationWillBeSavedTwoTimes()
+        {
+            // arrange
+            Item item = new Item
+            {
+                Name = "name",
+                Description = "descritpion",
+                Date = DateTime.Now
+            };
+            dbContext.Items.Add(item);
+            dbContext.SaveChanges();
+
+            ItemNotification invalidNotification = new ItemNotification
+            {
+                Item = item,
+                ItemId = item.Id,
+                Notified = false,
+                NotifiactionDate = DateTime.Now
+            };
+
+            // act
+            itemNotificationRepository.Save(invalidNotification);
+            itemNotificationRepository.Save(invalidNotification);
         }
 
         [TestMethod()]

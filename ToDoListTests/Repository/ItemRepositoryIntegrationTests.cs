@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using ToDoList.Entity;
 using Effort;
 using ToDoListTests.Repository;
+using System;
+using System.Data.Entity.Validation;
 
 namespace ToDoList.Repository.Tests
 {
@@ -36,6 +38,36 @@ namespace ToDoList.Repository.Tests
             Assert.AreEqual(2, returnedItems.Count);
             CollectionAssert.Contains(returnedItems, RepositoryTestsConstants.SECOND_DB_ITEM);
             CollectionAssert.Contains(returnedItems, RepositoryTestsConstants.THIRD_DB_ITEM);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(DbEntityValidationException))]
+        public void ShouldThrowEntityValidationExceptionWhenItemNameIsNull()
+        {
+            // arrange
+            Item item = new Item
+            {
+                Description = "desc",
+                Date = DateTime.Now
+            };
+
+            // act
+            itemRepository.Save(item);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(DbEntityValidationException))]
+        public void ShouldThrowEntityValidationExceptionWhenItemDateIsNull()
+        {
+            // arrange
+            Item item = new Item
+            {
+                Description = "desc",
+                Name = "Name"
+            };
+
+            // act
+            itemRepository.Save(item);
         }
 
         [TestMethod()]

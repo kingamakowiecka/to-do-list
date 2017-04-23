@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ToDoList.View"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="NotificationWindow" Height="437" Width="466"
+        Title="Notification Settings" Height="437" Width="466"
         Activated="NotificationSettingsWindowActivated"
         Closing="NotificationSettingsWindowClosing">
     <Grid>
