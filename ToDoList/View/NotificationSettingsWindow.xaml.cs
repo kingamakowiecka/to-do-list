@@ -89,7 +89,7 @@ namespace ToDoList.View
             {
                 Item = SelectedItem,
                 ItemId = SelectedItem.Id,
-                NotifiactionDate = DateTimeHelper.RemoveSecondsFromDateTime((DateTime)NotificationDate.Value),
+                NotifiactionDate = DateTimeHelper.RemoveSecondsFromDateTime(NotificationDate.Value.GetValueOrDefault()),
                 Notified = false
             };
         }

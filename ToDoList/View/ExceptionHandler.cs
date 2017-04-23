@@ -10,6 +10,7 @@ namespace ToDoList.View
         public void HandleException(Exception exception)
         {
             String errorMessage;
+            Boolean shutDownApp = false;
 
             if (exception is DbEntityValidationException)
             {
@@ -24,8 +25,14 @@ namespace ToDoList.View
             else
             {
                 errorMessage = "Unknown exception: " + exception.GetBaseException().Message;
+                shutDownApp = true;
             }
             MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            if (shutDownApp)
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }

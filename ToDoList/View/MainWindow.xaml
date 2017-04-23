@@ -32,7 +32,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
-                                        <DataGridTextColumn.ElementStyle>
+                    <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
