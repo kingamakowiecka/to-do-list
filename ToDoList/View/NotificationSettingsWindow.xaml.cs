@@ -84,11 +84,13 @@ namespace ToDoList.View
 
         private ItemNotification CreateNewItemNotification()
         {
+            DateTime notificationDate = (DateTime)NotificationDate.Value;
+            notificationDate = notificationDate.AddTicks(-(notificationDate.Ticks % TimeSpan.TicksPerMinute));
             return new ItemNotification()
             {
                 Item = SelectedItem,
                 ItemId = SelectedItem.Id,
-                NotifiactionDate = (DateTime)NotificationDate.Value,
+                NotifiactionDate = notificationDate,
                 Notified = false
             };
         }
