@@ -81,7 +81,7 @@
     <Compile Include="Repository\ItemNotificationRepositoryIntegrationTests.cs" />
     <Compile Include="Repository\ItemRepositoryIntegrationTests.cs" />
     <Compile Include="Repository\RepositoryIntegrationTests.cs" />
-    <Compile Include="Repository\RepositoryTestsConstants.cs" />
+    <Compile Include="Repository\BaseRepositoryTests.cs" />
     <Compile Include="Util\DateTimeHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ using ToDoList.Entity;
 namespace ToDoList.Repository.Tests
 {
     [TestClass()]
-    public class RepositoryIntegrationTests
+    public class RepositoryIntegrationTests : BaseRepositoryTests
     {
         private ItemsDbContext dbContext;
         private IItemNotificationRepository itemNotificationRepository;
@@ -26,19 +26,22 @@ namespace ToDoList.Repository.Tests
         public void ShouldDeleteItemAndItsNotification()
         {
             // arrange
-            dbContext.Items.Add(RepositoryTestsConstants.THIRD_DB_ITEM);
-            dbContext.ItemNotifications.Add(RepositoryTestsConstants.THIRD_ITEM_NOTIFICATION);
+            Item item = PrepareItem("name", "descritpion", TODAY, false);
+            ItemNotification notification = PrepareItemNotification(item, TODAY, false);
+
+            dbContext.Items.Add(item);
+            dbContext.ItemNotifications.Add(notification);
             dbContext.SaveChanges();
 
             // act
-            itemRepository.Delete(RepositoryTestsConstants.THIRD_DB_ITEM);
+            itemRepository.Delete(item);
 
             // assert
-            List<Item> items = itemRepository.FindByDate(RepositoryTestsConstants.YESTERDAY);
-            ItemNotification notification = itemNotificationRepository.FindByItemId(RepositoryTestsConstants.THIRD_DB_ITEM.Id);
+            List<Item> items = itemRepository.FindByDate(TODAY);
+            ItemNotification returnedNotification = itemNotificationRepository.FindByItemId(item.Id);
 
             Assert.AreEqual(0, items.Count);
-            Assert.IsNull(notification);
+            Assert.IsNull(returnedNotification);
         }
     }
 }
