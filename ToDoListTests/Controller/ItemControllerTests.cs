@@ -54,7 +54,7 @@ namespace ToDoList.Controller.Tests
         public void ShouldCallUpdateOnItemRepositoryForNewItem()
         {
             // arrange
-            Item newItem = new Item { Id = 1};
+            Item newItem = new Item { Id = 1 };
 
             // act
             itemController.SaveItem(newItem);
@@ -67,7 +67,7 @@ namespace ToDoList.Controller.Tests
         public void ShouldCallDeleteOnItemRepositoryForNewItem()
         {
             // arrange
-            Item itemToDelete = new Item ();
+            Item itemToDelete = new Item();
 
             // act
             itemController.DeleteItem(itemToDelete);

@@ -24,7 +24,6 @@ namespace ToDoList.View
 
         public void NotificationSettingsWindowClosing(object sender, CancelEventArgs e)
         {
-            typeof(Window).GetField("_isClosing", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(this, false);
             e.Cancel = true;
             Hide();
         }

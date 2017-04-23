@@ -23,7 +23,7 @@ namespace ToDoList.View
             }
             else
             {
-                errorMessage = exception.GetBaseException().Message;
+                errorMessage = "Unknown exception: " + exception.GetBaseException().Message;
             }
             MessageBoxResult result = MessageBox.Show(errorMessage, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Error);
         }

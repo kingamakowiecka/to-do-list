@@ -23,12 +23,15 @@
         </GroupBox>
         <DataGrid ColumnWidth="*" Name="DataGrid1" HeadersVisibility="Column" ItemsSource="{Binding ItemList}" VerticalAlignment="Top" Height="Auto" CanUserAddRows="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="true" Margin="10,113,10,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100">                    <DataGridTextColumn.ElementStyle>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100">
+                    <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
                         </Style>
-                    </DataGridTextColumn.ElementStyle>                </DataGridTextColumn>                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
                                         <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
