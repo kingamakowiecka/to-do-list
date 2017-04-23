@@ -5,7 +5,6 @@ using ToDoList.Entity;
 
 namespace ToDoList.View
 {
-
     public partial class NotificationWindow : Window
     {
         public Item SelectedItem;
