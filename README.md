@@ -17,6 +17,8 @@ For each item, there is a possibility to set up notification. For each notificat
 
 [Moq](https://github.com/moq/moq4)
 
+[MSTest.TestFramework](https://www.nuget.org/packages/MSTest.TestFramework/)
+
 [Castle Windsor](https://github.com/castleproject/Windsor/)
 
 [Entity Framework](https://www.nuget.org/packages/EntityFramework)
